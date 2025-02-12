@@ -1,6 +1,12 @@
 import React from 'react';
+import SearchBar from './components/common/SearchBar';
 
 const App: React.FC = () => {
+  const handleSearch = (searchTerm: string) => {
+    // Handle search logic here
+    console.log('Searching for:', searchTerm);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
@@ -10,7 +16,12 @@ const App: React.FC = () => {
       </header>
       
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <p>Welcome to GitGood - Find your next open source contribution!</p>
+        <div className="space-y-6">
+          <p className="text-lg text-gray-600">
+            Welcome to GitGood - Find your next open source contribution!
+          </p>
+          <SearchBar onSearch={handleSearch} />
+        </div>
       </main>
     </div>
   );
