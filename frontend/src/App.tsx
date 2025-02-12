@@ -1,7 +1,6 @@
 import React from 'react';
-import SearchBar from './components/common/SearchBar';
-import { Button } from './components/ui/button'
-
+import SearchBar from 'components/common/SearchBar';
+import { DifficultyButton } from "components/ui/difficulty-tag"
 
 
 const App: React.FC = () => {
@@ -24,7 +23,13 @@ const App: React.FC = () => {
             Welcome to GitGood - Find your next open source contribution!
           </p>
           <SearchBar onSearch={handleSearch} />
-          <Button variant="outline">Button</Button>
+
+          <div className="flex space-x-2">
+            <DifficultyButton level="beginner" onClick={() => console.log('Beginner clicked')} />
+            <DifficultyButton level="intermediate" onClick={() => console.log('Intermediate clicked')} />
+            <DifficultyButton level="advanced" onClick={() => console.log('Advanced clicked')} />
+          </div>
+
         </div>
       </main>
     </div>
