@@ -1,4 +1,7 @@
 import React from 'react';
+import { Button } from './components/ui/button'
+
+
 
 const App: React.FC = () => {
   return (
@@ -11,6 +14,8 @@ const App: React.FC = () => {
       
       <main className="max-w-7xl mx-auto px-4 py-8">
         <p>Welcome to GitGood - Find your next open source contribution!</p>
+        <Button variant="outline">Button</Button>
+
       </main>
     </div>
   );
