@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -23,3 +24,35 @@
     "src"
   ]
 }
+=======
+    "compilerOptions": {
+      "target": "es5",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "types": ["node", "jest", "json-schema"],  // Add this line
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "jsx": "react-jsx",
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": ["./*"]
+      }
+    },
+    "include": [
+      "src"
+    ]
+  }
+>>>>>>> 9d573a6069b8b76983288f2e4605262d0be8bc47
