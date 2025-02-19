@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import SearchBar from 'components/common/SearchBar';
-import { DifficultyButton } from "components/ui/difficulty-tag"
-=======
 import React, { useState } from 'react';
+import { DifficultyButton } from "components/ui/difficulty-tag"
 import SearchBar from './components/common/SearchBar';
 import GitHubService from './services/github/GithubService';
->>>>>>> Stashed changes
 
 const githubService = new GitHubService();
 
@@ -46,7 +41,6 @@ const App: React.FC = () => {
             Welcome to GitGood - Find your next open source contribution!
           </p>
           <SearchBar onSearch={handleSearch} />
-<<<<<<< Updated upstream
 
           <div className="flex space-x-2">
             <DifficultyButton level="beginner" onClick={() => console.log('Beginner clicked')} />
@@ -54,7 +48,6 @@ const App: React.FC = () => {
             <DifficultyButton level="advanced" onClick={() => console.log('Advanced clicked')} />
           </div>
 
-=======
           
           {loading && (
             <div className="text-center">
@@ -91,7 +84,6 @@ const App: React.FC = () => {
               ))}
             </div>
           )}
->>>>>>> Stashed changes
         </div>
       </main>
     </div>
