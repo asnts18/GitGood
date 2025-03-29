@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from 'components/common/Header';
-import SearchBar from 'components/common/SearchBar';
+import EnhancedSearchBar3 from '../components/common/EnhancedSearchBar3';
 import GitHubService from 'services/github/GithubService';
 import { FilterContainer } from 'components/filters/FilterContainer';
 import { UI } from 'utils/constants';
@@ -12,14 +12,29 @@ const HomePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const handleSearch = async (searchTerm: string) => {
-    if (!searchTerm.trim()) return;
+  const handleSearch = async (searchData: {
+    searchTerm: string,
+    language?: string,
+    organization?: string
+  }) => {
+    if (!searchData.searchTerm.trim() && !searchData.language && !searchData.organization) return;
     
     setLoading(true);
     setError(null);
     
     try {
-      const response = await githubService.searchRepositories(searchTerm);
+      // Build GitHub search query with filters
+      let query = searchData.searchTerm;
+      
+      if (searchData.language) {
+        query += ` language:${searchData.language}`;
+      }
+      
+      if (searchData.organization) {
+        query += ` org:${searchData.organization}`;
+      }
+      
+      const response = await githubService.searchRepositories(query);
       setResults(response.items);
     } catch (err) {
       setError('Failed to fetch repositories');
@@ -31,18 +46,18 @@ const HomePage: React.FC = () => {
   
   return (
     <div className="min-h-screen bg-gray-50">
-
-    <Header />
+      <Header />
       
       <main className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
         <div className="space-y-6">
           <p className="text-lg text-gray-600">
             {UI.WELCOME_TEXT}
           </p>
-          <SearchBar onSearch={handleSearch} />
+          
+          <EnhancedSearchBar3 onSearch={handleSearch} />
           
           <FilterContainer />
-          
+
           {loading && (
             <div className="text-center">
               <p>Loading...</p>
