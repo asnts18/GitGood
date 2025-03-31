@@ -1,5 +1,3 @@
-// UNUSED FOR NOW - MIGHT DELETE
-
 import React, { useState } from 'react';
 import Header from 'components/common/Header';
 import EnhancedSearchBar from '../components/common/EnhancedSearchBar';
@@ -11,7 +9,7 @@ import RepositoryCard, { Repository, Issue } from 'components/common/RepositoryC
 
 const githubService = new GitHubService();
 
-const HomePage: React.FC = () => {
+const SearchPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'issues' | 'projects'>('projects');
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(false);
@@ -113,8 +111,9 @@ const HomePage: React.FC = () => {
       <main className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
         <div className="space-y-6">
           <div className="p-6 rounded-xl bg-white shadow-sm mb-8">
-            <p className="text-lg text-neutral-black font-medium">
-              {UI.WELCOME_TEXT}
+            <h1 className="text-2xl font-heading text-primary mb-2">Search Projects & Issues</h1>
+            <p className="text-lg text-neutral-black">
+              Find open source projects and issues that match your skills and interests.
             </p>
           </div>
           
@@ -122,7 +121,7 @@ const HomePage: React.FC = () => {
           
           <FilterContainer />
           
-          {/* Add the tabs component */}
+          {/* Tabs component */}
           <ProjectTabs activeTab={activeTab} onTabChange={handleTabChange} />
           
           {loading && (
@@ -161,25 +160,8 @@ const HomePage: React.FC = () => {
           )}
         </div>
       </main>
-      
-      {/* Wave pattern section at the bottom */}
-      <section className="wave-bottom mt-16 pb-24 pt-12 bg-white relative">
-        <div className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
-          <h2 className="text-2xl font-heading text-primary mb-4">Ready to contribute?</h2>
-          <p className="text-neutral-black max-w-2xl">
-            Find open source projects that match your skills and interests. 
-            GitGood makes it easy to discover beginner-friendly issues and start 
-            your open source journey today.
-          </p>
-          
-          <div className="mt-8 flex">
-            <button className="btn btn-primary mr-4">Browse Popular Projects</button>
-            <button className="btn btn-outline">Learn More</button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
 
-export default HomePage;
+export default SearchPage;

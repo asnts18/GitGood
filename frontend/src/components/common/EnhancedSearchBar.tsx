@@ -221,15 +221,15 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={placeholder}
-            className="w-full px-4 py-3 pl-10 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 pl-10 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
           <Search 
-            className="absolute left-3 text-gray-400" 
+            className="absolute left-3 text-primary-light" 
             size={18}
           />
           <button
             type="submit"
-            className="ml-2 px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="ml-2 px-6 py-3 text-sm font-medium text-neutral-white bg-primary rounded-full hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             Search
           </button>
@@ -240,7 +240,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
           {/* Language filter */}
           <div className="relative" ref={languageInputRef}>
             <div className="flex items-center">
-              <Tag className="absolute left-3 text-gray-400" size={16} />
+              <Tag className="absolute left-3 text-primary-light" size={16} />
               <input
                 type="text"
                 value={languageFilter}
@@ -248,7 +248,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
                 onFocus={() => setShowLanguageSuggestions(true)}
                 onKeyDown={handleLanguageKeyDown}
                 placeholder="Add language filter..."
-                className="w-full pl-10 pr-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
               <Button
                 type="button"
@@ -267,11 +267,11 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             
             {/* Language suggestions */}
             {showLanguageSuggestions && filteredLanguageSuggestions.length > 0 && (
-              <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-200 py-1 max-h-64 overflow-y-auto">
+              <div className="absolute z-10 mt-1 w-full bg-white rounded-lg shadow-lg border border-secondary-200 py-1 max-h-64 overflow-y-auto">
                 {filteredLanguageSuggestions.map((language) => (
                   <div
                     key={language}
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-50"
+                    className="px-4 py-2 cursor-pointer hover:bg-secondary-50 text-neutral-black"
                     onClick={() => {
                       addLanguageFilter(language);
                       setShowLanguageSuggestions(false);
@@ -287,7 +287,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
           {/* Organization filter */}
           <div className="relative" ref={orgInputRef}>
             <div className="flex items-center">
-              <Users className="absolute left-3 text-gray-400" size={16} />
+              <Users className="absolute left-3 text-primary-light" size={16} />
               <input
                 type="text"
                 value={orgFilter}
@@ -295,7 +295,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
                 onFocus={() => setShowOrgSuggestions(true)}
                 onKeyDown={handleOrgKeyDown}
                 placeholder="Add organization filter..."
-                className="w-full pl-10 pr-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
               <Button
                 type="button"
@@ -314,11 +314,11 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             
             {/* Organization suggestions */}
             {showOrgSuggestions && filteredOrgSuggestions.length > 0 && (
-              <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-200 py-1 max-h-64 overflow-y-auto">
+              <div className="absolute z-10 mt-1 w-full bg-white rounded-lg shadow-lg border border-secondary-200 py-1 max-h-64 overflow-y-auto">
                 {filteredOrgSuggestions.map((org) => (
                   <div
                     key={org}
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-50"
+                    className="px-4 py-2 cursor-pointer hover:bg-secondary-50 text-neutral-black"
                     onClick={() => {
                       addOrgFilter(org);
                       setShowOrgSuggestions(false);
@@ -334,7 +334,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
           {/* Topic filter */}
           <div className="relative" ref={topicInputRef}>
             <div className="flex items-center">
-              <Hash className="absolute left-3 text-gray-400" size={16} />
+              <Hash className="absolute left-3 text-primary-light" size={16} />
               <input
                 type="text"
                 value={topicFilter}
@@ -342,7 +342,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
                 onFocus={() => setShowTopicSuggestions(true)}
                 onKeyDown={handleTopicKeyDown}
                 placeholder="Add topic filter (e.g., machine-learning, game-development)..."
-                className="w-full pl-10 pr-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
               <Button
                 type="button"
@@ -361,11 +361,11 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             
             {/* Topic suggestions */}
             {showTopicSuggestions && filteredTopicSuggestions.length > 0 && (
-              <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-200 py-1 max-h-64 overflow-y-auto">
+              <div className="absolute z-10 mt-1 w-full bg-white rounded-lg shadow-lg border border-secondary-200 py-1 max-h-64 overflow-y-auto">
                 {filteredTopicSuggestions.map((topic) => (
                   <div
                     key={topic}
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-50"
+                    className="px-4 py-2 cursor-pointer hover:bg-secondary-50 text-neutral-black"
                     onClick={() => {
                       addTopicFilter(topic);
                       setShowTopicSuggestions(false);
@@ -383,12 +383,12 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
         {(activeLanguages.length > 0 || activeOrgs.length > 0 || activeTopics.length > 0) && (
           <div className="flex flex-wrap gap-2 mt-2">
             {activeLanguages.map(language => (
-              <div key={language} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center text-sm">
+              <div key={language} className="bg-secondary-100 text-primary px-3 py-1 rounded-full flex items-center text-sm">
                 <span>language: {language}</span>
                 <button 
                   type="button"
                   onClick={() => removeLanguageFilter(language)} 
-                  className="ml-2 text-blue-800 hover:opacity-80"
+                  className="ml-2 text-primary hover:opacity-80"
                   aria-label={`Remove ${language} filter`}
                 >
                   <X className="h-4 w-4" />
@@ -397,12 +397,12 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             ))}
             
             {activeOrgs.map(org => (
-              <div key={org} className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full flex items-center text-sm">
+              <div key={org} className="bg-secondary-200 text-primary-light px-3 py-1 rounded-full flex items-center text-sm">
                 <span>org: {org}</span>
                 <button 
                   type="button"
                   onClick={() => removeOrgFilter(org)} 
-                  className="ml-2 text-purple-800 hover:opacity-80"
+                  className="ml-2 text-primary-light hover:opacity-80"
                   aria-label={`Remove ${org} filter`}
                 >
                   <X className="h-4 w-4" />
@@ -411,12 +411,12 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             ))}
             
             {activeTopics.map(topic => (
-              <div key={topic} className="bg-green-100 text-green-800 px-3 py-1 rounded-full flex items-center text-sm">
+              <div key={topic} className="bg-accent text-neutral-navy px-3 py-1 rounded-full flex items-center text-sm">
                 <span>topic: {topic}</span>
                 <button 
                   type="button"
                   onClick={() => removeTopicFilter(topic)} 
-                  className="ml-2 text-green-800 hover:opacity-80"
+                  className="ml-2 text-neutral-navy hover:opacity-80"
                   aria-label={`Remove ${topic} filter`}
                 >
                   <X className="h-4 w-4" />
@@ -428,8 +428,8 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
         
         {/* Query preview */}
         {(activeLanguages.length > 0 || activeOrgs.length > 0 || activeTopics.length > 0) && (
-          <div className="text-sm text-gray-500 mt-2">
-            <span className="font-medium">Search query:</span> {searchTerm} {getQueryDisplay()}
+          <div className="text-sm text-primary-light mt-2">
+            <span className="font-medium text-primary">Search query:</span> {searchTerm} {getQueryDisplay()}
           </div>
         )}
       </form>

@@ -12,10 +12,10 @@ export const DropdownDifficulty: React.FC = () => {
   const getDifficultyColor = (selected: boolean) => {
     if (!selected) {
       return {
-        textColor: 'text-gray-700',
+        textColor: 'text-neutral-black',
         bgColor: 'bg-white',
-        hoverColor: 'bg-gray-50',
-        borderColor: 'border-gray-300'
+        hoverColor: 'bg-secondary-50',
+        borderColor: 'border-secondary-300'
       };
     }
     
@@ -24,31 +24,31 @@ export const DropdownDifficulty: React.FC = () => {
     switch (level) {
       case 'beginner':
         return {
-          textColor: selected ? 'text-white' : 'text-green-600',
-          bgColor: selected ? 'bg-green-600' : 'bg-green-50',
-          hoverColor: 'bg-green-700',
-          borderColor: 'border-green-600'
+          textColor: selected ? 'text-neutral-white' : 'text-primary',
+          bgColor: selected ? 'bg-primary' : 'bg-secondary-100',
+          hoverColor: 'bg-primary-dark',
+          borderColor: 'border-primary'
         };
       case 'intermediate':
         return {
-          textColor: selected ? 'text-white' : 'text-blue-600',
-          bgColor: selected ? 'bg-blue-600' : 'bg-blue-50',
-          hoverColor: 'bg-blue-700',
-          borderColor: 'border-blue-600'
+          textColor: selected ? 'text-neutral-white' : 'text-primary-light',
+          bgColor: selected ? 'bg-primary-light' : 'bg-secondary-200',
+          hoverColor: 'bg-primary',
+          borderColor: 'border-primary-light'
         };
       case 'advanced':
         return {
-          textColor: selected ? 'text-white' : 'text-purple-600',
-          bgColor: selected ? 'bg-purple-600' : 'bg-purple-50',
-          hoverColor: 'bg-purple-700',
-          borderColor: 'border-purple-600'
+          textColor: selected ? 'text-neutral-white' : 'text-primary-dark',
+          bgColor: selected ? 'bg-primary-dark' : 'bg-secondary-300',
+          hoverColor: 'bg-primary-dark',
+          borderColor: 'border-primary-dark'
         };
       default:
         return {
-          textColor: selected ? 'text-white' : 'text-green-600',
-          bgColor: selected ? 'bg-green-600' : 'bg-green-50',
-          hoverColor: 'bg-green-700',
-          borderColor: 'border-green-600'
+          textColor: selected ? 'text-neutral-white' : 'text-primary',
+          bgColor: selected ? 'bg-primary' : 'bg-secondary-100',
+          hoverColor: 'bg-primary-dark',
+          borderColor: 'border-primary'
         };
     }
   };

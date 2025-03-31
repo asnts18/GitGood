@@ -4,56 +4,108 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: 260 56% 91%; /* secondary.100 - E6E1F0 */
+    --foreground: 234 25% 14%; /* neutral.black - 1A1A2E */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 234 25% 14%; /* neutral.black - 1A1A2E */
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --popover-foreground: 234 25% 14%; /* neutral.black - 1A1A2E */
+    --primary: 254 44% 43%; /* primary - 4F3C9E */
+    --primary-foreground: 0 0% 100%; /* neutral.white - FFFFFF */
+    --secondary: 260 56% 91%; /* secondary.100 - E6E1F0 */
+    --secondary-foreground: 254 44% 43%; /* primary - 4F3C9E */
+    --muted: 260 41% 85%; /* secondary.200 - D1C9E8 */
+    --muted-foreground: 254 27% 53%; /* primary.light - 7B6CB0 */
+    --accent: 50 100% 50%; /* accent - FFD700 */
+    --accent-foreground: 216 100% 20%; /* neutral.navy - 003366 */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
+    --border: 260 33% 76%; /* secondary.300 - B7AADC */
+    --input: 260 33% 76%; /* secondary.300 - B7AADC */
+    --ring: 254 44% 43%; /* primary - 4F3C9E */
+    --radius: 1rem;
   }
  
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 254 44% 25%; /* primary.dark - 3A2980 */
+    --foreground: 0 0% 100%; /* neutral.white - FFFFFF */
+    --card: 254 44% 25%; /* primary.dark - 3A2980 */
+    --card-foreground: 0 0% 100%; /* neutral.white - FFFFFF */
+    --popover: 254 44% 25%; /* primary.dark - 3A2980 */
+    --popover-foreground: 0 0% 100%; /* neutral.white - FFFFFF */
+    --primary: 0 0% 100%; /* neutral.white - FFFFFF */
+    --primary-foreground: 254 44% 43%; /* primary - 4F3C9E */
+    --secondary: 254 32% 32%; /* darker primary */
+    --secondary-foreground: 0 0% 100%; /* neutral.white - FFFFFF */
+    --muted: 254 32% 32%; /* darker primary */
+    --muted-foreground: 260 33% 76%; /* secondary.300 - B7AADC */
+    --accent: 50 100% 50%; /* accent - FFD700 */
+    --accent-foreground: 216 100% 20%; /* neutral.navy - 003366 */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 254 27% 53%; /* primary.light - 7B6CB0 */
+    --input: 254 27% 53%; /* primary.light - 7B6CB0 */
+    --ring: 260 41% 85%; /* secondary.200 - D1C9E8 */
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-secondary-100 text-neutral-black font-body;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-primary;
+  }
+  button {
+    @apply rounded-full;
+  }
+}
+
+/* Add these font imports at the top of the file */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Component-specific styles */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-neutral-white hover:bg-primary-dark;
+  }
+  
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-secondary-200 hover:text-primary-dark;
+  }
+  
+  .btn-accent {
+    @apply bg-accent text-neutral-navy hover:bg-accent-hover;
+  }
+  
+  .input-base {
+    @apply w-full px-4 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+  }
+  
+  .filter-badge {
+    @apply px-3 py-1 rounded-full flex items-center text-sm;
+  }
+  
+  .nav-link {
+    @apply text-primary-light hover:text-primary font-medium px-4;
+  }
+  
+  .card {
+    @apply p-4 bg-white rounded-xl shadow-md;
+  }
+  
+  /* Wave pattern decoration for bottom of sections */
+  .wave-bottom {
+    @apply relative;
+  }
+  
+  .wave-bottom::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-32 bg-wave-pattern bg-repeat-x bg-bottom;
+    z-index: -1;
   }
 }
