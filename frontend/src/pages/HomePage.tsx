@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from 'components/common/Header';
-import EnhancedSearchBar3 from '../components/common/EnhancedSearchBar3';
+import EnhancedSearchBar from '../components/common/EnhancedSearchBar';
 import GitHubService from 'services/github/GithubService';
 import { FilterContainer } from 'components/filters/FilterContainer';
 import { UI } from 'utils/constants';
@@ -114,7 +114,7 @@ const HomePage: React.FC = () => {
             {UI.WELCOME_TEXT}
           </p>
           
-          <EnhancedSearchBar3 onSearch={handleSearch} />
+          <EnhancedSearchBar onSearch={handleSearch} />
           
           <FilterContainer />
           
