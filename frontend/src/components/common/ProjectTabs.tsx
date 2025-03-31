@@ -7,12 +7,12 @@ interface ProjectTabsProps {
 
 const ProjectTabs: React.FC<ProjectTabsProps> = ({ activeTab, onTabChange }) => {
   return (
-    <div className="flex justify-center border-b mb-6">
+    <div className="flex justify-center border-b border-secondary-300 mb-6">
       <button
-        className={`px-6 py-3 flex items-center justify-center ${
+        className={`px-6 py-3 flex items-center justify-center font-heading ${
           activeTab === 'projects' 
-            ? 'border-b-2 border-blue-600 font-medium text-blue-600' 
-            : 'text-gray-500 hover:text-gray-700'
+            ? 'border-b-2 border-primary font-medium text-primary' 
+            : 'text-primary-light hover:text-primary'
         }`}
         onClick={() => onTabChange('projects')}
       >
@@ -33,10 +33,10 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ activeTab, onTabChange }) => 
         Projects
       </button>
       <button
-        className={`px-6 py-3 flex items-center justify-center ${
+        className={`px-6 py-3 flex items-center justify-center font-heading ${
           activeTab === 'issues' 
-            ? 'border-b-2 border-blue-600 font-medium text-blue-600' 
-            : 'text-gray-500 hover:text-gray-700'
+            ? 'border-b-2 border-primary font-medium text-primary' 
+            : 'text-primary-light hover:text-primary'
         }`}
         onClick={() => onTabChange('issues')}
       >

@@ -12,10 +12,10 @@ export const DropdownTimeframe: React.FC = () => {
   
   const getTimeframeColor = (selected: boolean) => {
     return {
-      textColor: selected ? 'text-white' : 'text-amber-700',
-      bgColor: selected ? 'bg-amber-600' : 'bg-amber-50',
-      hoverColor: 'bg-amber-700',
-      borderColor: 'border-amber-600'
+      textColor: selected ? 'text-neutral-navy' : 'text-accent-foreground',
+      bgColor: selected ? 'bg-accent' : 'bg-secondary-50',
+      hoverColor: 'bg-accent-hover',
+      borderColor: 'border-accent'
     };
   };
   

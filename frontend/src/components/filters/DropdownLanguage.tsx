@@ -11,10 +11,10 @@ export const DropdownLanguage: React.FC = () => {
   
   const getLanguageColor = (selected: boolean) => {
     return {
-      textColor: selected ? 'text-white' : 'text-cyan-700',
-      bgColor: selected ? 'bg-cyan-600' : 'bg-cyan-50',
-      hoverColor: 'bg-cyan-700',
-      borderColor: 'border-cyan-600'
+      textColor: selected ? 'text-neutral-white' : 'text-primary',
+      bgColor: selected ? 'bg-primary' : 'bg-secondary-100',
+      hoverColor: 'bg-primary-dark',
+      borderColor: 'border-primary'
     };
   };
   

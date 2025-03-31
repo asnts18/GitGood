@@ -21,13 +21,13 @@ export const ActiveFilters: React.FC = () => {
     
     switch (selectedDifficulty) {
       case 'beginner':
-        return { bg: 'bg-green-100', text: 'text-green-800' };
+        return { bg: 'bg-secondary-100', text: 'text-primary' };
       case 'intermediate':
-        return { bg: 'bg-blue-100', text: 'text-blue-800' };
+        return { bg: 'bg-secondary-200', text: 'text-primary-light' };
       case 'advanced':
-        return { bg: 'bg-purple-100', text: 'text-purple-800' };
+        return { bg: 'bg-secondary-300', text: 'text-primary-dark' };
       default:
-        return { bg: 'bg-green-100', text: 'text-green-800' };
+        return { bg: 'bg-secondary-100', text: 'text-primary' };
     }
   };
   
@@ -36,7 +36,7 @@ export const ActiveFilters: React.FC = () => {
   
   return (
     <div className="mt-4">
-      <h3 className="text-sm font-medium text-gray-700 mb-2">Active Filters:</h3>
+      <h3 className="text-sm font-medium text-primary mb-2 font-heading">Active Filters:</h3>
       <div className="flex flex-wrap gap-2">
         {selectedDifficulty && (
           <FilterBadge
@@ -50,8 +50,8 @@ export const ActiveFilters: React.FC = () => {
         {selectedLanguage && (
           <FilterBadge
             label={`Language: ${selectedLanguage}`}
-            bgColor="bg-cyan-100"
-            textColor="text-cyan-800"
+            bgColor="bg-secondary-200"
+            textColor="text-primary"
             onRemove={() => setSelectedLanguage(null)}
           />
         )}
@@ -59,14 +59,14 @@ export const ActiveFilters: React.FC = () => {
         {selectedTimeframe && (
           <FilterBadge
             label={`Last Updated: ${selectedTimeframe}`}
-            bgColor="bg-amber-100"
-            textColor="text-amber-800"
+            bgColor="bg-accent"
+            textColor="text-neutral-navy"
             onRemove={() => setSelectedTimeframe(null)}
           />
         )}
         
         {!hasActiveFilters && (
-          <span className="text-sm text-gray-500">No filters selected</span>
+          <span className="text-sm text-primary-light">No filters selected</span>
         )}
       </div>
     </div>
