@@ -6,6 +6,7 @@ import { FilterContainer } from 'components/filters/FilterContainer';
 import { UI } from 'utils/constants';
 import ProjectTabs from 'components/common/ProjectTabs';
 import RepositoryCard, { Repository, Issue } from 'components/common/RepositoryCard';
+import { useFilters } from 'contexts/FilterContext';
 
 const githubService = new GitHubService();
 
@@ -15,29 +16,55 @@ const SearchPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
+  // Access filter context
+  const { 
+    selectedDifficulty, 
+    selectedLanguage, 
+    selectedTimeframe 
+  } = useFilters();
+  
   const handleSearch = async (searchData: {
     searchTerm: string,
     language?: string,
-    organization?: string
+    organization?: string,
+    topic?: string
   }) => {
-    if (!searchData.searchTerm.trim() && !searchData.language && !searchData.organization) return;
-    
+    // Allow empty search terms for broader filtering
     setLoading(true);
     setError(null);
     
     try {
-      // Build GitHub search query with filters
-      let query = searchData.searchTerm;
+      let query = searchData.searchTerm.trim();
       
-      if (searchData.language) {
+      // Add language filter if it's not already in the search term
+      if (searchData.language && !query.includes(`language:${searchData.language}`)) {
         query += ` language:${searchData.language}`;
+      } else if (selectedLanguage && !query.includes(`language:${selectedLanguage}`)) {
+        query += ` language:${selectedLanguage}`;
       }
       
-      if (searchData.organization) {
+      // Add organization filter if it's not already in the search term
+      if (searchData.organization && !query.includes(`org:${searchData.organization}`)) {
         query += ` org:${searchData.organization}`;
       }
       
-      const response = await githubService.searchRepositories(query);
+      // Add topic filter if it's not already in the search term
+      if (searchData.topic && !query.includes(`topic:${searchData.topic}`)) {
+        query += ` topic:${searchData.topic}`;
+      }
+      
+      // Add difficulty level as a topic if selected
+      if (selectedDifficulty && !query.includes(`topic:${selectedDifficulty}`)) {
+        query += ` topic:${selectedDifficulty}`;
+      }
+      
+      const response = await githubService.searchRepositories({
+        searchTerm: query,
+        language: (searchData.language || selectedLanguage || undefined),
+        organization: searchData.organization,
+        topic: searchData.topic,
+        difficultyLevel: selectedDifficulty || undefined
+      });
       
       // Reset any previously loaded issues
       const cleanRepositories = response.items.map((repo: any) => ({

@@ -1,60 +1,64 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { FILTER_OPTIONS } from 'utils/constants';
+import React, { createContext, useState, useContext } from 'react';
+import { UI } from '../utils/constants';
 
-// Filter types
-export type DifficultyLevel = typeof FILTER_OPTIONS.DIFFICULTY[number];
-export type ProgrammingLanguage = typeof FILTER_OPTIONS.LANGUAGES[number];
-export type TimeframeOption = typeof FILTER_OPTIONS.TIMEFRAMES[number];
+// Define types
+export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced' | null;
+export type ProgrammingLanguage = string | null;
+export type TimeframeOption = string | null;
 
+// Define context interface
 interface FiltersContextType {
-  // Available options
   difficultyLevels: DifficultyLevel[];
   programmingLanguages: ProgrammingLanguage[];
   timeframeOptions: TimeframeOption[];
-  
-  // Selected values
-  selectedDifficulty: DifficultyLevel | null;
-  selectedLanguage: ProgrammingLanguage | null;
-  selectedTimeframe: TimeframeOption | null;
-  
-  // Actions
-  setSelectedDifficulty: (difficulty: DifficultyLevel | null) => void;
-  setSelectedLanguage: (language: ProgrammingLanguage | null) => void;
-  setSelectedTimeframe: (timeframe: TimeframeOption | null) => void;
-  
-  // Dropdown state
+  selectedDifficulty: DifficultyLevel;
+  selectedLanguage: ProgrammingLanguage;
+  selectedTimeframe: TimeframeOption;
+  setSelectedDifficulty: (difficulty: DifficultyLevel) => void;
+  setSelectedLanguage: (language: ProgrammingLanguage) => void;
+  setSelectedTimeframe: (timeframe: TimeframeOption) => void;
   openDropdown: string | null;
   setOpenDropdown: (dropdown: string | null) => void;
 }
 
-const FiltersContext = createContext<FiltersContextType | undefined>(undefined);
+// Create context with default values
+const FiltersContext = createContext<FiltersContextType>({
+  difficultyLevels: ['beginner', 'intermediate', 'advanced'],
+  programmingLanguages: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'Ruby', 'C++', 'C#', 'PHP', 'Rust'],
+  timeframeOptions: ['Last day', 'Last week', 'Last month', 'Last 3 months', 'Last 6 months', 'Last year'],
+  selectedDifficulty: null,
+  selectedLanguage: null,
+  selectedTimeframe: null,
+  setSelectedDifficulty: () => {},
+  setSelectedLanguage: () => {},
+  setSelectedTimeframe: () => {},
+  openDropdown: null,
+  setOpenDropdown: () => {}
+});
 
-export const useFilters = (): FiltersContextType => {
-  const context = useContext(FiltersContext);
-  if (!context) {
-    throw new Error('useFilters must be used within a FiltersProvider');
-  }
-  return context;
-};
-
-interface FiltersProviderProps {
-  children: ReactNode;
-}
-
-export const FiltersProvider: React.FC<FiltersProviderProps> = ({ children }) => {
-  // Available options
-  const difficultyLevels = [...FILTER_OPTIONS.DIFFICULTY];
-  const programmingLanguages = [...FILTER_OPTIONS.LANGUAGES];
-  const timeframeOptions = [...FILTER_OPTIONS.TIMEFRAMES];
+// Provider component
+export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // State for selected filters
+  const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<ProgrammingLanguage>(null);
+  const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeOption>(null);
   
-  // Selected values state
-  const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel | null>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState<ProgrammingLanguage | null>(null);
-  const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeOption | null>(null);
-  
-  // Track which dropdown is open
+  // State for tracking which dropdown is open
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   
+  // Available options
+  const difficultyLevels: DifficultyLevel[] = ['beginner', 'intermediate', 'advanced'];
+  
+  const programmingLanguages: ProgrammingLanguage[] = [
+    'JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'Ruby', 'C++', 'C#', 'PHP', 'Rust', 
+    'Swift', 'Kotlin', 'Dart', 'Shell', 'HTML', 'CSS', 'R', 'Scala', 'Haskell'
+  ];
+  
+  const timeframeOptions: TimeframeOption[] = [
+    'Last day', 'Last week', 'Last month', 'Last 3 months', 'Last 6 months', 'Last year'
+  ];
+  
+  // Context value
   const value = {
     difficultyLevels,
     programmingLanguages,
@@ -76,5 +80,5 @@ export const FiltersProvider: React.FC<FiltersProviderProps> = ({ children }) =>
   );
 };
 
-// Export to make it a module
-export default FiltersProvider;
+// Custom hook for using the filters context
+export const useFilters = () => useContext(FiltersContext);

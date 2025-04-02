@@ -3,11 +3,11 @@ import { Button } from "../../components/ui/ButtonComponent";
 import { useFilters } from '../../contexts/FilterContext';
 import { ChevronDown, X } from 'lucide-react';
 
-interface FilterChipProps<T> {
+interface FilterChipProps<T extends string | null> {
   type: 'difficulty' | 'language' | 'timeframe';
   label: string;
   value: T | null;
-  options: T[];
+  options: T[];  // This allows T[] where T can be string or null
   onSelect: (value: T | null) => void;
   getColor: (selected: boolean) => {
     textColor: string;
@@ -18,7 +18,7 @@ interface FilterChipProps<T> {
   formatOption?: (option: T) => string;
 }
 
-export function FilterChip<T>({
+export function FilterChip<T extends string | null>({
   type,
   label,
   value,
