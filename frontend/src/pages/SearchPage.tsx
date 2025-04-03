@@ -6,6 +6,7 @@ import { FilterContainer } from 'components/filters/FilterContainer';
 import { UI } from 'utils/constants';
 import ProjectTabs from 'components/common/ProjectTabs';
 import RepositoryCard, { Repository, Issue } from 'components/common/RepositoryCard';
+import { useFilters } from 'contexts/FilterContext';
 
 const githubService = new GitHubService();
 
@@ -15,29 +16,36 @@ const SearchPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
+  // Access filter context
+  const { 
+    selectedDifficulty, 
+    selectedLanguage, 
+    selectedTimeframe 
+  } = useFilters();
+  
   const handleSearch = async (searchData: {
     searchTerm: string,
     language?: string,
-    organization?: string
+    organization?: string,
+    topic?: string
   }) => {
-    if (!searchData.searchTerm.trim() && !searchData.language && !searchData.organization) return;
-    
+    // Allow empty search terms for broader filtering
     setLoading(true);
     setError(null);
     
     try {
-      // Build GitHub search query with filters
-      let query = searchData.searchTerm;
-      
-      if (searchData.language) {
-        query += ` language:${searchData.language}`;
-      }
-      
-      if (searchData.organization) {
-        query += ` org:${searchData.organization}`;
-      }
-      
-      const response = await githubService.searchRepositories(query);
+      // Use the improved searchRepositories method that accepts an object
+      const response = await githubService.searchRepositories({
+        searchTerm: searchData.searchTerm.trim(),
+        language: searchData.language || selectedLanguage || undefined,
+        organization: searchData.organization,
+        topic: searchData.topic,
+        difficultyLevel: selectedDifficulty || undefined,
+        // Ensure we sort by stars to get the most popular repos first
+        sort: 'stars',
+        order: 'desc',
+        perPage: 20
+      });
       
       // Reset any previously loaded issues
       const cleanRepositories = response.items.map((repo: any) => ({

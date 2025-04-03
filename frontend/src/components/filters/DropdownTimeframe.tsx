@@ -24,7 +24,7 @@ export const DropdownTimeframe: React.FC = () => {
       type="timeframe"
       label="Last Updated"
       value={selectedTimeframe}
-      options={timeframeOptions}
+      options={timeframeOptions.filter(Boolean) as string[]}
       onSelect={setSelectedTimeframe}
       getColor={getTimeframeColor}
     />

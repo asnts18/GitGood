@@ -23,7 +23,7 @@ export const DropdownLanguage: React.FC = () => {
       type="language"
       label="Language"
       value={selectedLanguage}
-      options={programmingLanguages}
+      options={programmingLanguages.filter(Boolean) as string[]}
       onSelect={setSelectedLanguage}
       getColor={getLanguageColor}
     />

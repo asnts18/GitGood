@@ -54,6 +54,7 @@ export const DropdownDifficulty: React.FC = () => {
   };
   
   const formatDifficulty = (level: DifficultyLevel): string => {
+    if (!level) return 'All'; // Or whatever default you want to show
     return level.charAt(0).toUpperCase() + level.slice(1);
   };
   
