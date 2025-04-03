@@ -2,16 +2,6 @@ import axios from 'axios';
 import { GITHUB_API } from 'utils/constants';
 import { isEnglishText } from 'utils/language-detection-utility';
 
-// Define interfaces for better type checking
-export interface SearchParams {
-  searchTerm: string;
-  language?: string;
-  organization?: string;
-  topic?: string;
-  customLabels?: string[];
-  difficultyLevel?: string;
-}
-
 class GitHubService {
   private api = axios.create({
     baseURL: GITHUB_API.BASE_URL,
@@ -19,104 +9,150 @@ class GitHubService {
   });
 
   /**
-   * Search for repositories with enhanced filtering
+   * Search for repositories with improved parameters and error handling
    */
-  async searchRepositories(searchParams: SearchParams) {
+  async searchRepositories({
+    searchTerm, 
+    language,
+    organization,
+    topic,
+    difficultyLevel,
+    sort = GITHUB_API.SEARCH.DEFAULT_SORT as 'stars' | 'forks' | 'help-wanted-issues' | 'updated',
+    order = GITHUB_API.SEARCH.DEFAULT_ORDER as 'desc'| 'asc',
+    perPage = GITHUB_API.SEARCH.DEFAULT_PER_PAGE,
+    page = 1
+  }: {
+    searchTerm: string,
+    language?: string,
+    organization?: string,
+    topic?: string,
+    difficultyLevel?: string,
+    sort?: 'stars' | 'forks' | 'help-wanted-issues' | 'updated',
+    order?: 'desc' | 'asc',
+    perPage?: number,
+    page?: number
+  }) {
     try {
-      let query = "";
+      // Construct a more effective query
+      let enhancedQuery = searchTerm.trim();
       
-      // Add search term as a generic search if it exists
-      if (searchParams.searchTerm.trim()) {
-        query += searchParams.searchTerm.trim();
-      }
-      
-      // Always include is:open for repositories
-      query += " is:open type:repository";
-      
-      // Add language filter if provided
-      if (searchParams.language) {
-        query += ` language:${searchParams.language}`;
-      }
-      
-      // Add organization filter if provided
-      if (searchParams.organization) {
-        query += ` org:${searchParams.organization}`;
-      }
-      
-      // Add topic filter if provided
-      if (searchParams.topic) {
-        query += ` topic:${searchParams.topic}`;
-      }
-      
-      // Add difficulty level as a topic
-      if (searchParams.difficultyLevel) {
-        // Add different variations of beginner-friendly topics
-        if (searchParams.difficultyLevel === 'beginner') {
-          query += ` topic:${searchParams.difficultyLevel} OR topic:beginner-friendly OR topic:good-first-issue OR topic:first-timers-only`;
+      // If the search term doesn't have qualifiers, enhance it
+      if (!enhancedQuery.includes(':')) {
+        // Check if this might be a specific repository search (contains a slash)
+        if (enhancedQuery.includes('/')) {
+          // For repo searches like "vuejs/vue", prioritize exact repo name matches
+          const [owner, repo] = enhancedQuery.split('/');
+          enhancedQuery = `${enhancedQuery} OR ${repo} in:name,description user:${owner}`;
         } else {
-          query += ` topic:${searchParams.difficultyLevel}`;
+          // For term searches like "vue", search in name, description, and readme
+          enhancedQuery = `${enhancedQuery} in:name,description,readme`;
         }
       }
-
-      // Add custom labels if provided
-      if (searchParams.customLabels && searchParams.customLabels.length > 0) {
-        searchParams.customLabels.forEach(label => {
-          query += ` ${label}`;
-        });
-      }
-
-      // Filter for repositories with English content
-      if (!query.includes("in:name,description,readme")) {
-        query += " in:name,description,readme";
+      
+      // Add filters if they're not already in the query
+      if (language && !enhancedQuery.includes(`language:`)) {
+        enhancedQuery += ` language:${language}`;
       }
       
-      // Exclude archived repositories
-      query += " archived:false";
+      if (organization && !enhancedQuery.includes(`org:`)) {
+        enhancedQuery += ` org:${organization}`;
+      }
       
-      console.log("GitHub API Query:", query); // For debugging
+      if (topic && !enhancedQuery.includes(`topic:`)) {
+        enhancedQuery += ` topic:${topic}`;
+      }
+      
+      if (difficultyLevel && !enhancedQuery.includes(`topic:${difficultyLevel}`)) {
+        enhancedQuery += ` topic:${difficultyLevel}`;
+      }
       
       const response = await this.api.get('/search/repositories', {
         params: {
-          q: query,
-          sort: GITHUB_API.SEARCH.DEFAULT_SORT, // stars, forks, updated
-          order: GITHUB_API.SEARCH.DEFAULT_ORDER, // desc
-          per_page: GITHUB_API.SEARCH.DEFAULT_PER_PAGE * 2 // Fetch more to allow for filtering
+          q: enhancedQuery,
+          sort,
+          order,
+          per_page: perPage,
+          page
         },
       });
       
-      // Filter out repositories with non-English descriptions
-      const filteredItems = response.data.items.filter((repo: any) => 
-        isEnglishText(repo.description)
-      ).slice(0, GITHUB_API.SEARCH.DEFAULT_PER_PAGE); // Take only the first N items
+      // Add debugging information in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`GitHub Search: "${enhancedQuery}" returned ${response.data.total_count} results`);
+      }
       
-      return {
-        ...response.data,
-        items: filteredItems
-      };
-    } catch (error) {
-      console.error('Error searching repositories:', error);
+      // Filter out repositories with majority non-Latin characters in description
+      if (response.data && response.data.items) {
+        response.data.items = response.data.items.filter((repo: any) => 
+          isEnglishText(repo.description)
+        );
+      }
+      
+      return response.data;
+    } catch (error: any) {
+      console.error('Error searching repositories:', error?.response?.data || error);
+      
+      // Check for rate limiting
+      if (error.response?.status === 403 && error.response?.data?.message?.includes('rate limit')) {
+        throw new Error('GitHub API rate limit exceeded. Please try again later.');
+      }
+      
       throw error;
     }
   }
 
   /**
-   * Get issues for a repository with original implementation
+   * Get issues for a repository with improved parameters
    */
-  async getRepositoryIssues(owner: string, repo: string, limit: number = 5) {
+  async getRepositoryIssues(
+    owner: string, 
+    repo: string, 
+    options: {
+      state?: 'open' | 'closed' | 'all',
+      labels?: string, 
+      sort?: 'created' | 'updated' | 'comments',
+      direction?: 'asc' | 'desc',
+      limit?: number
+    } = {}
+  ) {
+    const { 
+      state = 'open',
+      labels,
+      sort = 'updated',
+      direction = 'desc',
+      limit = 5
+    } = options;
+    
     try {
-      // Use the standard endpoint for better relevance
-      const response = await this.api.get(`/repos/${owner}/${repo}/issues`, {
-        params: {
-          state: 'open',
-          sort: 'updated',
-          direction: 'desc',
-          per_page: limit
-        },
-      });
+      const params: Record<string, any> = {
+        state,
+        sort,
+        direction,
+        per_page: limit
+      };
       
+      // Only add labels if specified
+      if (labels) {
+        params.labels = labels;
+      }
+      
+      const response = await this.api.get(`/repos/${owner}/${repo}/issues`, { params });
       return response.data;
     } catch (error) {
       console.error(`Error fetching issues for ${owner}/${repo}:`, error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Get information about a specific repository
+   */
+  async getRepository(owner: string, repo: string) {
+    try {
+      const response = await this.api.get(`/repos/${owner}/${repo}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching repository ${owner}/${repo}:`, error);
       throw error;
     }
   }

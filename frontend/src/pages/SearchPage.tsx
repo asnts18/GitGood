@@ -34,36 +34,17 @@ const SearchPage: React.FC = () => {
     setError(null);
     
     try {
-      let query = searchData.searchTerm.trim();
-      
-      // Add language filter if it's not already in the search term
-      if (searchData.language && !query.includes(`language:${searchData.language}`)) {
-        query += ` language:${searchData.language}`;
-      } else if (selectedLanguage && !query.includes(`language:${selectedLanguage}`)) {
-        query += ` language:${selectedLanguage}`;
-      }
-      
-      // Add organization filter if it's not already in the search term
-      if (searchData.organization && !query.includes(`org:${searchData.organization}`)) {
-        query += ` org:${searchData.organization}`;
-      }
-      
-      // Add topic filter if it's not already in the search term
-      if (searchData.topic && !query.includes(`topic:${searchData.topic}`)) {
-        query += ` topic:${searchData.topic}`;
-      }
-      
-      // Add difficulty level as a topic if selected
-      if (selectedDifficulty && !query.includes(`topic:${selectedDifficulty}`)) {
-        query += ` topic:${selectedDifficulty}`;
-      }
-      
+      // Use the improved searchRepositories method that accepts an object
       const response = await githubService.searchRepositories({
-        searchTerm: query,
-        language: (searchData.language || selectedLanguage || undefined),
+        searchTerm: searchData.searchTerm.trim(),
+        language: searchData.language || selectedLanguage || undefined,
         organization: searchData.organization,
         topic: searchData.topic,
-        difficultyLevel: selectedDifficulty || undefined
+        difficultyLevel: selectedDifficulty || undefined,
+        // Ensure we sort by stars to get the most popular repos first
+        sort: 'stars',
+        order: 'desc',
+        perPage: 20
       });
       
       // Reset any previously loaded issues
