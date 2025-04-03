@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 import { UI } from '../utils/constants';
 
 // Define types
@@ -17,6 +17,7 @@ interface FiltersContextType {
   setSelectedDifficulty: (difficulty: DifficultyLevel) => void;
   setSelectedLanguage: (language: ProgrammingLanguage) => void;
   setSelectedTimeframe: (timeframe: TimeframeOption) => void;
+  clearAllFilters: () => void;
   openDropdown: string | null;
   setOpenDropdown: (dropdown: string | null) => void;
 }
@@ -32,6 +33,7 @@ const FiltersContext = createContext<FiltersContextType>({
   setSelectedDifficulty: () => {},
   setSelectedLanguage: () => {},
   setSelectedTimeframe: () => {},
+  clearAllFilters: () => {},
   openDropdown: null,
   setOpenDropdown: () => {}
 });
@@ -45,6 +47,15 @@ export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ child
   
   // State for tracking which dropdown is open
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  
+  // Function to clear all filters
+  const clearAllFilters = useCallback(() => {
+    setSelectedDifficulty(null);
+    setSelectedLanguage(null);
+    setSelectedTimeframe(null);
+    // Close any open dropdowns when clearing filters
+    setOpenDropdown(null);
+  }, []);
   
   // Available options
   const difficultyLevels: DifficultyLevel[] = ['beginner', 'intermediate', 'advanced'];
@@ -69,6 +80,7 @@ export const FiltersProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setSelectedDifficulty,
     setSelectedLanguage,
     setSelectedTimeframe,
+    clearAllFilters,
     openDropdown,
     setOpenDropdown
   };
