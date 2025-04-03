@@ -1,6 +1,7 @@
 import React from 'react';
 import FilterBadge from './FilterBadge';
 import { useFilters, DifficultyLevel } from '../../contexts/FilterContext';
+import { Button } from '../../components/ui/ButtonComponent';
 
 export const ActiveFilters: React.FC = () => {
   const {
@@ -9,7 +10,8 @@ export const ActiveFilters: React.FC = () => {
     selectedTimeframe,
     setSelectedDifficulty,
     setSelectedLanguage,
-    setSelectedTimeframe
+    setSelectedTimeframe,
+    clearAllFilters
   } = useFilters();
   
   const formatDifficulty = (level: DifficultyLevel): string => {
@@ -35,9 +37,30 @@ export const ActiveFilters: React.FC = () => {
   const difficultyColors = getDifficultyColors();
   const hasActiveFilters = selectedDifficulty || selectedLanguage || selectedTimeframe;
   
+  if (!hasActiveFilters) {
+    return (
+      <div className="mt-4">
+        <h3 className="text-sm font-medium text-primary mb-2 font-heading">Active Filters:</h3>
+        <span className="text-sm text-primary-light">No filters selected</span>
+      </div>
+    );
+  }
+  
   return (
     <div className="mt-4">
-      <h3 className="text-sm font-medium text-primary mb-2 font-heading">Active Filters:</h3>
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="text-sm font-medium text-primary font-heading">Active Filters:</h3>
+        {hasActiveFilters && (
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={clearAllFilters}
+            className="text-xs text-primary-light hover:text-primary"
+          >
+            Clear All
+          </Button>
+        )}
+      </div>
       <div className="flex flex-wrap gap-2">
         {selectedDifficulty && (
           <FilterBadge
@@ -64,10 +87,6 @@ export const ActiveFilters: React.FC = () => {
             textColor="text-neutral-navy"
             onRemove={() => setSelectedTimeframe(null)}
           />
-        )}
-        
-        {!hasActiveFilters && (
-          <span className="text-sm text-primary-light">No filters selected</span>
         )}
       </div>
     </div>

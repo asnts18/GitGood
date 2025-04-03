@@ -7,7 +7,7 @@ type ProgrammingLanguage = string;
 type Organization = string;
 type Topic = string;
 
-// Suggested options (will now be just suggestions)
+// Suggested options
 const SUGGESTED_LANGUAGES: ProgrammingLanguage[] = [
   'JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Go', 'Rust', 'Ruby', 'PHP'
 ];
@@ -46,9 +46,9 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
   const [activeTopics, setActiveTopics] = useState<string[]>([]);
   
   // Input refs
-  const languageInputRef = useRef<HTMLInputElement>(null);
-  const orgInputRef = useRef<HTMLInputElement>(null);
-  const topicInputRef = useRef<HTMLInputElement>(null);
+  const languageInputRef = useRef<HTMLDivElement>(null);
+  const orgInputRef = useRef<HTMLDivElement>(null);
+  const topicInputRef = useRef<HTMLDivElement>(null);
   
   // Suggestion state
   const [showLanguageSuggestions, setShowLanguageSuggestions] = useState(false);
@@ -140,21 +140,21 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
   };
   
   // Handle keyboard events for filter inputs
-  const handleLanguageKeyDown = (e: React.KeyboardEvent) => {
+  const handleLanguageKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && languageFilter.trim()) {
       e.preventDefault(); // Prevent form submission
       addLanguageFilter(languageFilter.trim());
     }
   };
   
-  const handleOrgKeyDown = (e: React.KeyboardEvent) => {
+  const handleOrgKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && orgFilter.trim()) {
       e.preventDefault(); // Prevent form submission
       addOrgFilter(orgFilter.trim());
     }
   };
   
-  const handleTopicKeyDown = (e: React.KeyboardEvent) => {
+  const handleTopicKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && topicFilter.trim()) {
       e.preventDefault(); // Prevent form submission
       addTopicFilter(topicFilter.trim());
@@ -211,25 +211,45 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
     return parts.length > 0 ? parts.join(' ') : '';
   };
 
+  // Render a filter chip inside the field
+  const renderFilterChip = (value: string, onRemove: () => void, color: string) => (
+    <div className={`${color} rounded-full px-2 py-1 mr-1 text-xs flex items-center`}>
+      <span className="mr-1">{value}</span>
+      <button 
+        type="button"
+        onClick={onRemove}
+        className="hover:bg-secondary-300/20 rounded-full p-0.5"
+      >
+        <X size={12} />
+      </button>
+    </div>
+  );
+
   return (
     <div className="w-full max-w-4xl">
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Main search input */}
         <div className="relative flex items-center">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder={placeholder}
-            className="w-full px-4 py-3 pl-10 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-          <Search 
-            className="absolute left-3 text-primary-light" 
-            size={18}
-          />
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-primary-light" size={18} />
+            <div className="w-full flex items-center px-4 py-3 pl-10 text-sm border border-secondary-300 rounded-full focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder={placeholder}
+                className="flex-grow min-w-0 outline-none"
+              />
+              {(activeLanguages.length > 0 || activeOrgs.length > 0 || activeTopics.length > 0) && (
+                <div className="ml-2 text-primary-light text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap">
+                  {getQueryDisplay()}
+                </div>
+              )}
+            </div>
+          </div>
           <button
             type="submit"
-            className="ml-2 px-6 py-3 text-sm font-medium text-neutral-white bg-primary rounded-full hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="ml-2 px-6 py-3 text-sm font-medium text-neutral-white bg-primary rounded-full hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 whitespace-nowrap"
           >
             Search
           </button>
@@ -241,28 +261,20 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
           <div className="relative" ref={languageInputRef}>
             <div className="flex items-center">
               <Tag className="absolute left-3 text-primary-light" size={16} />
-              <input
-                type="text"
-                value={languageFilter}
-                onChange={(e) => setLanguageFilter(e.target.value)}
-                onFocus={() => setShowLanguageSuggestions(true)}
-                onKeyDown={handleLanguageKeyDown}
-                placeholder="Add language filter..."
-                className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm" 
-                className="ml-2"
-                onClick={() => {
-                  if (languageFilter.trim()) {
-                    addLanguageFilter(languageFilter.trim());
-                  }
-                }}
-              >
-                Add
-              </Button>
+              <div className="flex flex-wrap items-center w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent">
+                {activeLanguages.map(lang => 
+                  renderFilterChip(lang, () => removeLanguageFilter(lang), "bg-secondary-100 text-primary")
+                )}
+                <input
+                  type="text"
+                  value={languageFilter}
+                  onChange={(e) => setLanguageFilter(e.target.value)}
+                  onFocus={() => setShowLanguageSuggestions(true)}
+                  onKeyDown={handleLanguageKeyDown}
+                  placeholder={activeLanguages.length > 0 ? "" : "Add language filter..."}
+                  className="flex-grow outline-none bg-transparent"
+                />
+              </div>
             </div>
             
             {/* Language suggestions */}
@@ -288,28 +300,20 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
           <div className="relative" ref={orgInputRef}>
             <div className="flex items-center">
               <Users className="absolute left-3 text-primary-light" size={16} />
-              <input
-                type="text"
-                value={orgFilter}
-                onChange={(e) => setOrgFilter(e.target.value)}
-                onFocus={() => setShowOrgSuggestions(true)}
-                onKeyDown={handleOrgKeyDown}
-                placeholder="Add organization filter..."
-                className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="ml-2"
-                onClick={() => {
-                  if (orgFilter.trim()) {
-                    addOrgFilter(orgFilter.trim());
-                  }
-                }}
-              >
-                Add
-              </Button>
+              <div className="flex flex-wrap items-center w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent">
+                {activeOrgs.map(org => 
+                  renderFilterChip(org, () => removeOrgFilter(org), "bg-secondary-200 text-primary-light")
+                )}
+                <input
+                  type="text"
+                  value={orgFilter}
+                  onChange={(e) => setOrgFilter(e.target.value)}
+                  onFocus={() => setShowOrgSuggestions(true)}
+                  onKeyDown={handleOrgKeyDown}
+                  placeholder={activeOrgs.length > 0 ? "" : "Add organization filter..."}
+                  className="flex-grow outline-none bg-transparent"
+                />
+              </div>
             </div>
             
             {/* Organization suggestions */}
@@ -335,28 +339,20 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
           <div className="relative" ref={topicInputRef}>
             <div className="flex items-center">
               <Hash className="absolute left-3 text-primary-light" size={16} />
-              <input
-                type="text"
-                value={topicFilter}
-                onChange={(e) => setTopicFilter(e.target.value)}
-                onFocus={() => setShowTopicSuggestions(true)}
-                onKeyDown={handleTopicKeyDown}
-                placeholder="Add topic filter (e.g., machine-learning, game-development)..."
-                className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="ml-2"
-                onClick={() => {
-                  if (topicFilter.trim()) {
-                    addTopicFilter(topicFilter.trim());
-                  }
-                }}
-              >
-                Add
-              </Button>
+              <div className="flex flex-wrap items-center w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent">
+                {activeTopics.map(topic => 
+                  renderFilterChip(topic, () => removeTopicFilter(topic), "bg-accent text-neutral-navy")
+                )}
+                <input
+                  type="text"
+                  value={topicFilter}
+                  onChange={(e) => setTopicFilter(e.target.value)}
+                  onFocus={() => setShowTopicSuggestions(true)}
+                  onKeyDown={handleTopicKeyDown}
+                  placeholder={activeTopics.length > 0 ? "" : "Add topic filter (e.g., machine-learning, game-development)..."}
+                  className="flex-grow outline-none bg-transparent"
+                />
+              </div>
             </div>
             
             {/* Topic suggestions */}
@@ -378,60 +374,6 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
             )}
           </div>
         </div>
-        
-        {/* Active filters */}
-        {(activeLanguages.length > 0 || activeOrgs.length > 0 || activeTopics.length > 0) && (
-          <div className="flex flex-wrap gap-2 mt-2">
-            {activeLanguages.map(language => (
-              <div key={language} className="bg-secondary-100 text-primary px-3 py-1 rounded-full flex items-center text-sm">
-                <span>language: {language}</span>
-                <button 
-                  type="button"
-                  onClick={() => removeLanguageFilter(language)} 
-                  className="ml-2 text-primary hover:opacity-80"
-                  aria-label={`Remove ${language} filter`}
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
-            
-            {activeOrgs.map(org => (
-              <div key={org} className="bg-secondary-200 text-primary-light px-3 py-1 rounded-full flex items-center text-sm">
-                <span>org: {org}</span>
-                <button 
-                  type="button"
-                  onClick={() => removeOrgFilter(org)} 
-                  className="ml-2 text-primary-light hover:opacity-80"
-                  aria-label={`Remove ${org} filter`}
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
-            
-            {activeTopics.map(topic => (
-              <div key={topic} className="bg-accent text-neutral-navy px-3 py-1 rounded-full flex items-center text-sm">
-                <span>topic: {topic}</span>
-                <button 
-                  type="button"
-                  onClick={() => removeTopicFilter(topic)} 
-                  className="ml-2 text-neutral-navy hover:opacity-80"
-                  aria-label={`Remove ${topic} filter`}
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        
-        {/* Query preview */}
-        {(activeLanguages.length > 0 || activeOrgs.length > 0 || activeTopics.length > 0) && (
-          <div className="text-sm text-primary-light mt-2">
-            <span className="font-medium text-primary">Search query:</span> {searchTerm} {getQueryDisplay()}
-          </div>
-        )}
       </form>
     </div>
   );
