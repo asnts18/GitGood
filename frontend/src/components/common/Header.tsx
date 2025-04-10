@@ -15,12 +15,17 @@ const Header: React.FC<HeaderProps> = ({ title = 'GitGood' }) => {
   };
 
   return (
-    <header className="bg-white shadow">
+    <header className="bg-secondary-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <Link to="/">
-          <h1 className="text-3xl font-bold font-heading text-primary">{title}</h1>
-        </Link>
-        <nav className="mt-4 flex justify-center space-x-8">
+        {/* Centered title container */}
+        <div className="flex justify-center mb-4">
+          <Link to="/" className="inline-block">
+            <h1 className="text-3xl font-bold font-heading text-primary">{title}</h1>
+          </Link>
+        </div>
+        
+        {/* Navigation links (already centered) */}
+        <nav className="flex justify-center space-x-8">
           <Link 
             to="/" 
             className={`${isActive('/') ? 'text-primary' : 'text-primary-light'} hover:text-primary font-medium`}
