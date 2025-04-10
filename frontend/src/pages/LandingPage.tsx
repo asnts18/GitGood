@@ -6,7 +6,6 @@ import developerCoding from '../images/developer-coding.png';
 import collaboration from '../images/collaboration.png';
 import resume from '../images/resume.png';
 import logo from '../images/logo.png'
-import { log } from 'console';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -27,14 +26,23 @@ const LandingPage: React.FC = () => {
         {/* Hero Section */}
         <section className="w-full py-16">
             <div className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
-            <div className="flex flex-col md:flex-row items-center justify-between">
-                <div className="max-w-3xl">
+                {/* Logo centered above content */}
+                <div className="flex justify-center mb-8">
+                    <img 
+                        src={logo} 
+                        alt="GitGood Logo"
+                        className="w-64 h-64 object-contain"
+                    />
+                </div>
+                
+                {/* Main content */}
+                <div className="text-center max-w-3xl mx-auto">
                     <h1 className="text-4xl font-heading text-primary mb-6">Find your next open source contribution</h1>
                     <p className="text-xl text-neutral-black mb-8">
-                    GitGood helps you discover beginner-friendly issues in open source projects 
-                    that match your skills and interests.
+                        GitGood helps you discover beginner-friendly issues in open source projects 
+                        that match your skills and interests.
                     </p>
-                    <div className="flex space-x-4">
+                    <div className="flex justify-center space-x-4">
                         <button 
                             onClick={handleBrowseProjects} 
                             className="bg-primary text-neutral-white px-6 py-3 rounded-full hover:bg-primary-dark transition-colors"
@@ -48,14 +56,6 @@ const LandingPage: React.FC = () => {
                             Learn More
                         </button>
                     </div>
-                </div>
-                    <div className="flex-1 flex justify-center">
-                        <img 
-                        src={logo} 
-                        alt="GitGood Logo"
-                        className="w-64 h-64 object-contain"
-                    />
-                </div>
                 </div>
             </div>
         </section>

@@ -11,7 +11,7 @@ const AboutPage: React.FC = () => {
       <Header />
       
       <main className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
-        <div className="p-6 rounded-xl bg-white shadow-sm mb-8">
+        <div className="p-6 rounded-xl bg-secondary-50 shadow-sm mb-8">
           <h1 className="text-3xl font-heading text-primary mb-4">About GitGood</h1>
           
           <section className="mb-8">
@@ -40,7 +40,7 @@ const AboutPage: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-heading text-primary mb-3">Why Open Source?</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-secondary-50 p-4 rounded-lg">
+              <div className="bg-secondary-100 p-4 rounded-lg">
                 <h3 className="text-xl font-heading text-primary mb-2">For Beginners</h3>
                 <ul className="list-disc list-inside space-y-1 text-neutral-black">
                   <li>Build real-world experience</li>
@@ -49,7 +49,7 @@ const AboutPage: React.FC = () => {
                   <li>Join a supportive community</li>
                 </ul>
               </div>
-              <div className="bg-secondary-50 p-4 rounded-lg">
+              <div className="bg-secondary-100 p-4 rounded-lg">
                 <h3 className="text-xl font-heading text-primary mb-2">For Projects</h3>
                 <ul className="list-disc list-inside space-y-1 text-neutral-black">
                   <li>Get help with smaller tasks</li>
