@@ -284,19 +284,6 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
                   placeholder="Add language filter..."
                   className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm" 
-                  className="ml-2"
-                  onClick={() => {
-                    if (languageFilter.trim()) {
-                      addLanguageFilter(languageFilter.trim());
-                    }
-                  }}
-                >
-                  Add
-                </Button>
               </div>
               
               {/* Language suggestions */}
@@ -331,19 +318,7 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
                   placeholder="Add organization filter..."
                   className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="ml-2"
-                  onClick={() => {
-                    if (orgFilter.trim()) {
-                      addOrgFilter(orgFilter.trim());
-                    }
-                  }}
-                >
-                  Add
-                </Button>
+
               </div>
               
               {/* Organization suggestions */}
@@ -378,19 +353,6 @@ const EnhancedSearchBar: React.FC<EnhancedSearchBarProps> = ({
                   placeholder="Add topic filter (e.g., machine-learning, game-development)..."
                   className="w-full pl-10 pr-3 py-2 text-sm border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="ml-2"
-                  onClick={() => {
-                    if (topicFilter.trim()) {
-                      addTopicFilter(topicFilter.trim());
-                    }
-                  }}
-                >
-                  Add
-                </Button>
               </div>
               
               {/* Topic suggestions */}
