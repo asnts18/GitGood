@@ -1,0 +1,19 @@
+{
+  "name": "gitgood",
+  "version": "1.0.0",
+  "description": "A platform to help developers find open source projects and issues that match their skill level. The platform includes both a web application and a Chrome extension to enhance the GitHub browsing experience.",
+  "main": "index.js",
+  "scripts": {
+  "start": "cd frontend && npm start",
+  "server": "cd backend && node server.js",
+  "server:dev": "cd backend && nodemon server.js",
+  "dev": "concurrently \"npm run start\" \"npm run server:dev\""
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10"
+  }
+}

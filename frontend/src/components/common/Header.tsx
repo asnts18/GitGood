@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { HelpCircle } from 'lucide-react';
 
 interface HeaderProps {
   // Optional props if you want to customize the header
@@ -24,8 +25,8 @@ const Header: React.FC<HeaderProps> = ({ title = 'GitGood' }) => {
           </Link>
         </div>
         
-        {/* Navigation links (already centered) */}
-        <nav className="flex justify-center space-x-8">
+        {/* Navigation links with additional items */}
+        <nav className="flex justify-center items-center space-x-8">
           <Link 
             to="/" 
             className={`${isActive('/') ? 'text-primary' : 'text-primary-light'} hover:text-primary font-medium`}
@@ -37,6 +38,13 @@ const Header: React.FC<HeaderProps> = ({ title = 'GitGood' }) => {
             className={`${isActive('/search') ? 'text-primary' : 'text-primary-light'} hover:text-primary font-medium`}
           >
             SEARCH
+          </Link>
+          <Link 
+            to="/getting-started" 
+            className={`${isActive('/getting-started') ? 'text-primary' : 'text-primary-light'} hover:text-primary font-medium flex items-center`}
+          >
+            <HelpCircle className="mr-1 h-4 w-4" />
+            GUIDE
           </Link>
           <Link 
             to="/about" 

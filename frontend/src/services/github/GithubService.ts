@@ -2,10 +2,12 @@ import axios from 'axios';
 import { GITHUB_API } from 'utils/constants';
 import { isEnglishText } from 'utils/language-detection-utility';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 class GitHubService {
+  // Use proxied API with our token for all requests
   private api = axios.create({
-    baseURL: GITHUB_API.BASE_URL,
-    headers: GITHUB_API.DEFAULT_HEADERS,
+    baseURL: `${API_BASE_URL}/github`,
   });
 
   /**
@@ -45,7 +47,7 @@ class GitHubService {
           enhancedQuery = `${enhancedQuery} OR ${repo} in:name,description user:${owner}`;
         } else {
           // For term searches like "vue", search in name, description, and readme
-          enhancedQuery = `${enhancedQuery} in:name,description,readme`;
+          enhancedQuery = `${enhancedQuery} in:name,description`;
         }
       }
       
@@ -66,15 +68,16 @@ class GitHubService {
         enhancedQuery += ` topic:${difficultyLevel}`;
       }
       
-      const response = await this.api.get('/search/repositories', {
-        params: {
-          q: enhancedQuery,
-          sort,
-          order,
-          per_page: perPage,
-          page
-        },
-      });
+      // Parameters for the API request
+      const params = {
+        q: enhancedQuery,
+        sort,
+        order,
+        per_page: perPage,
+        page
+      };
+
+      const response = await this.api.get('search/repositories', { params });
       
       // Add debugging information in development
       if (process.env.NODE_ENV === 'development') {
@@ -136,7 +139,7 @@ class GitHubService {
         params.labels = labels;
       }
       
-      const response = await this.api.get(`/repos/${owner}/${repo}/issues`, { params });
+      const response = await this.api.get(`repos/${owner}/${repo}/issues`, { params });
       return response.data;
     } catch (error) {
       console.error(`Error fetching issues for ${owner}/${repo}:`, error);
@@ -149,10 +152,23 @@ class GitHubService {
    */
   async getRepository(owner: string, repo: string) {
     try {
-      const response = await this.api.get(`/repos/${owner}/${repo}`);
+      const response = await this.api.get(`repos/${owner}/${repo}`);
       return response.data;
     } catch (error) {
       console.error(`Error fetching repository ${owner}/${repo}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get the current rate limit
+   */
+  async getRateLimit() {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/rate-limit`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching rate limit:', error);
       throw error;
     }
   }
