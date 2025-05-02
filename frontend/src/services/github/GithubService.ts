@@ -2,12 +2,13 @@ import axios from 'axios';
 import { GITHUB_API } from 'utils/constants';
 import { isEnglishText } from 'utils/language-detection-utility';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 
 class GitHubService {
   // Use proxied API with our token for all requests
   private api = axios.create({
-    baseURL: `${API_BASE_URL}/github`,
+    baseURL: `${API_BASE_URL}/api/github`,
   });
 
   /**
