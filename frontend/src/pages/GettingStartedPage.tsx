@@ -23,6 +23,7 @@ import commitChangesImg from '../images/github-commit-changes.png';
 import pushChangesImg from '../images/github-push-changes.png';
 import createPrImg from '../images/github-create-pr.png';
 import prFeedbackImg from '../images/github-pr-feedback.png';
+import contributionSuc from '../images/contribution-success.png'
 
 const IMAGES = {
     FORK_BUTTON: forkButtonImg,
@@ -33,6 +34,7 @@ const IMAGES = {
     CREATE_PR: createPrImg,
     PR_FEEDBACK: prFeedbackImg,
     BROWSE_PROJ:browseProj,
+    CONTRIBUTION_SUCCESS:contributionSuc,
   };
 
 const GettingStartedPage: React.FC = () => {
@@ -354,7 +356,7 @@ const GettingStartedPage: React.FC = () => {
               <div className="md:w-1/3 flex justify-center">
                 <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20">
                   <img 
-                    src="/images/contribution-success.png" 
+                    src={IMAGES.CONTRIBUTION_SUCCESS} 
                     alt="Successful GitHub contribution" 
                     className="w-full h-auto rounded shadow-md"
                   />
