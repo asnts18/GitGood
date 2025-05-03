@@ -24,31 +24,31 @@ export const DropdownDifficulty: React.FC = () => {
     switch (level) {
       case 'beginner':
         return {
-          textColor: selected ? 'text-neutral-white' : 'text-primary',
-          bgColor: selected ? 'bg-primary' : 'bg-secondary-100',
-          hoverColor: 'bg-primary-dark',
-          borderColor: 'border-primary'
+          textColor: selected ? 'text-white' : 'text-green-700',
+          bgColor: selected ? 'bg-green-600' : 'bg-green-50',
+          hoverColor: 'bg-green-700',
+          borderColor: 'border-green-500'
         };
       case 'intermediate':
         return {
-          textColor: selected ? 'text-neutral-white' : 'text-primary-light',
-          bgColor: selected ? 'bg-primary-light' : 'bg-secondary-200',
-          hoverColor: 'bg-primary',
-          borderColor: 'border-primary-light'
+          textColor: selected ? 'text-neutral-navy' : 'text-amber-700',
+          bgColor: selected ? 'bg-amber-500' : 'bg-amber-50',
+          hoverColor: 'bg-amber-600',
+          borderColor: 'border-amber-500'
         };
       case 'advanced':
         return {
-          textColor: selected ? 'text-neutral-white' : 'text-primary-dark',
-          bgColor: selected ? 'bg-primary-dark' : 'bg-secondary-300',
-          hoverColor: 'bg-primary-dark',
-          borderColor: 'border-primary-dark'
+          textColor: selected ? 'text-white' : 'text-red-700',
+          bgColor: selected ? 'bg-red-600' : 'bg-red-50',
+          hoverColor: 'bg-red-700',
+          borderColor: 'border-red-500'
         };
       default:
         return {
-          textColor: selected ? 'text-neutral-white' : 'text-primary',
-          bgColor: selected ? 'bg-primary' : 'bg-secondary-100',
-          hoverColor: 'bg-primary-dark',
-          borderColor: 'border-primary'
+          textColor: selected ? 'text-white' : 'text-green-700',
+          bgColor: selected ? 'bg-green-600' : 'bg-green-50',
+          hoverColor: 'bg-green-700',
+          borderColor: 'border-green-500'
         };
     }
   };
