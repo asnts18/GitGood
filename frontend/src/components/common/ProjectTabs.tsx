@@ -1,4 +1,5 @@
 import React from 'react';
+import { LayoutGrid, AlertCircle } from 'lucide-react';
 
 interface ProjectTabsProps {
   activeTab: 'issues' | 'projects';
@@ -7,55 +8,39 @@ interface ProjectTabsProps {
 
 const ProjectTabs: React.FC<ProjectTabsProps> = ({ activeTab, onTabChange }) => {
   return (
-    <div className="flex justify-center border-b border-secondary-300 mb-6">
-      <button
-        className={`px-6 py-3 flex items-center justify-center font-heading ${
-          activeTab === 'projects' 
-            ? 'border-b-2 border-primary font-medium text-primary' 
-            : 'text-primary-light hover:text-primary'
-        }`}
-        onClick={() => onTabChange('projects')}
-      >
-        <svg 
-          className="w-5 h-5 mr-2" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="3" y1="9" x2="21" y2="9"></line>
-          <line x1="9" y1="21" x2="9" y2="9"></line>
-        </svg>
-        Projects
-      </button>
-      <button
-        className={`px-6 py-3 flex items-center justify-center font-heading ${
-          activeTab === 'issues' 
-            ? 'border-b-2 border-primary font-medium text-primary' 
-            : 'text-primary-light hover:text-primary'
-        }`}
-        onClick={() => onTabChange('issues')}
-      >
-        <svg 
-          className="w-5 h-5 mr-2" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-        Issues
-      </button>
+    <div className="relative flex justify-center mb-6">
+      <div className="relative flex border-b border-secondary-200 w-full max-w-md">
+        <div className="flex w-full">
+          <button
+            className={`relative w-1/2 px-6 py-3 flex items-center justify-center font-heading transition-colors ${
+              activeTab === 'projects' ? 'text-primary' : 'text-primary-light hover:text-primary'
+            }`}
+            onClick={() => onTabChange('projects')}
+          >
+            <LayoutGrid className="w-5 h-5 mr-2" />
+            <span>Projects</span>
+          </button>
+
+          <button
+            className={`relative w-1/2 px-6 py-3 flex items-center justify-center font-heading transition-colors ${
+              activeTab === 'issues' ? 'text-primary' : 'text-primary-light hover:text-primary'
+            }`}
+            onClick={() => onTabChange('issues')}
+          >
+            <AlertCircle className="w-5 h-5 mr-2" />
+            <span>Issues</span>
+          </button>
+        </div>
+
+        {/* Active indicator */}
+        <div
+          className={`absolute bottom-0 h-0.5 bg-primary transition-all duration-300 ease-in-out`}
+          style={{
+            width: '50%',
+            left: activeTab === 'projects' ? '0%' : '50%',
+          }}
+        />
+      </div>
     </div>
   );
 };
