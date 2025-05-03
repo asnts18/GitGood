@@ -2,7 +2,7 @@
 
 GitGood is a platform designed to help developers discover beginner-friendly open source projects and issues that match their skills and interests. The application includes a web interface that makes it easy to filter and find opportunities for meaningful contributions.
 
-![GitGood Logo](frontend/src/images/newpurp.png)
+<img src="frontend/src/images/newpurp.png" alt="GitGood Logo" width="200" />
 
 ## 🚀 Features
 
