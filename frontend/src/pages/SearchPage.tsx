@@ -191,12 +191,23 @@ const SearchPage: React.FC = () => {
       
       <main className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
         <div className="space-y-6">
-          <div className="p-6 rounded-xl bg-secondary-50 shadow-sm mb-8">
-            <h1 className="text-2xl font-heading text-primary mb-2">Search Projects & Issues</h1>
-            <p className="text-lg text-neutral-black">
-              Find open source projects and issues that match your skills and interests.
-            </p>
-          </div>
+            <div className="p-8 rounded-2xl bg-white shadow-md border border-secondary-200 mb-10">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="h-12 w-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold text-primary tracking-tight mb-1">Search Projects & Issues</h1>
+                  <p className="text-md text-neutral-700 leading-relaxed">
+                    Explore open-source repositories tailored to your skills and interests. Filter by language, difficulty, and more to find the perfect opportunity.
+                  </p>
+                </div>
+              </div>
+            </div>
           
           {/* GitHub Status - shows app token information */}
           <GitHubStatus />

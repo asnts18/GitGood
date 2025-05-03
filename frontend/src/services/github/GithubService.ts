@@ -166,7 +166,7 @@ class GitHubService {
    */
   async getRateLimit() {
     try {
-      const response = await axios.get(`${API_BASE_URL}/rate-limit`);
+      const response = await axios.get(`${API_BASE_URL}/api/rate-limit`);
       return response.data;
     } catch (error) {
       console.error('Error fetching rate limit:', error);
