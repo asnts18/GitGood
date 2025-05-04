@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GITHUB_API } from 'utils/constants';
 import { isEnglishText } from 'utils/language-detection-utility';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_BASE_URL = 'http://ec2-13-219-75-54.compute-1.amazonaws.com:3001';
 
 
 class GitHubService {
