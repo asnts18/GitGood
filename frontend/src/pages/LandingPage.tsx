@@ -71,7 +71,7 @@ const LandingPage: React.FC = () => {
           <div className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="relative">
-                <div className="text-9xl font-heading text-primary opacity-80">01</div>
+                <div className="text-9xl font-heading text-accent opacity-80">01</div>
                 <div className="ml-4 mt-4">
                   <p className="text-xl text-primary-dark">
                     Studies show that contributing to open source can help developers land better jobs. 
@@ -85,7 +85,7 @@ const LandingPage: React.FC = () => {
                     <img 
                         src={developerCoding} 
                         alt="Developer coding" 
-                        className="w-72 h-72 object-cover"
+                        className="w-72 h-72 object-cover "
                     />
                 </div>
             </div>
@@ -104,7 +104,7 @@ const LandingPage: React.FC = () => {
               </div>
               
               <div className="relative md:order-2">
-                <div className="text-9xl font-heading text-primary opacity-80">02</div>
+                <div className="text-9xl font-heading text-accent opacity-80">02</div>
                 <div className="ml-4 mt-4">
                   <p className="text-xl text-primary-dark">
                     People can learn directly from experienced developers by contributing to 
@@ -121,7 +121,7 @@ const LandingPage: React.FC = () => {
             
             <div className="grid md:grid-cols-2 gap-16 items-center mt-16">
               <div className="relative">
-                <div className="text-9xl font-heading text-primary opacity-80">03</div>
+                <div className="text-9xl font-heading text-accent opacity-80">03</div>
                 <div className="ml-4 mt-4">
                   <p className="text-xl text-primary-dark">
                     Open source contributions stand out on your resume. GitHub reported that 
