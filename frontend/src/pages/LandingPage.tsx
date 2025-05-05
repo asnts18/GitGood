@@ -5,7 +5,7 @@ import { UI } from 'utils/constants';
 import developerCoding from '../images/developer-coding.png';
 import collaboration from '../images/collaboration.png';
 import resume from '../images/resume.png';
-import logo from '../images/logo.png'
+import logo from '../images/logo.png';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const LandingPage: React.FC = () => {
                 
                 {/* Main content */}
                 <div className="text-center max-w-3xl mx-auto">
-                    <h1 className="text-4xl font-heading text-primary mb-6">Find your next open source contribution</h1>
+                    <h1 className="text-4xl font-semibold font-heading text-primary-dark mb-6">Find your next open source contribution</h1>
                     <p className="text-xl text-neutral-black mb-8">
                         GitGood helps you discover beginner-friendly issues in open source projects 
                         that match your skills and interests.
@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
               <div className="relative">
                 <div className="text-9xl font-heading text-primary opacity-80">01</div>
                 <div className="ml-4 mt-4">
-                  <p className="text-xl text-primary">
+                  <p className="text-xl text-primary-dark">
                     Studies show that contributing to open source can help developers land better jobs. 
                     For every hour spent on open source contributions, developers report gaining four hours 
                     worth of practical experience.
@@ -106,7 +106,7 @@ const LandingPage: React.FC = () => {
               <div className="relative md:order-2">
                 <div className="text-9xl font-heading text-primary opacity-80">02</div>
                 <div className="ml-4 mt-4">
-                  <p className="text-xl text-primary">
+                  <p className="text-xl text-primary-dark">
                     People can learn directly from experienced developers by contributing to 
                     open source projects. It's a fantastic way to improve your coding skills 
                     while building meaningful connections in the tech community.
@@ -123,7 +123,7 @@ const LandingPage: React.FC = () => {
               <div className="relative">
                 <div className="text-9xl font-heading text-primary opacity-80">03</div>
                 <div className="ml-4 mt-4">
-                  <p className="text-xl text-primary">
+                  <p className="text-xl text-primary-dark">
                     Open source contributions stand out on your resume. GitHub reported that 
                     93% of hiring managers consider open source contributions an important factor 
                     when evaluating candidates for technical positions.
@@ -145,7 +145,7 @@ const LandingPage: React.FC = () => {
         {/* Product Showcase Section - similar to the cap showcase */}
         <section className="w-full py-16 bg-secondary-50">
           <div className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
-            <h2 className="text-3xl font-heading text-primary mb-12 text-center">What Makes GitGood Special</h2>
+            <h2 className="text-3xl font-heading text-primary-dark mb-12 text-center">What Makes GitGood Special</h2>
             
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="relative">
@@ -186,7 +186,7 @@ const LandingPage: React.FC = () => {
         {/* Call to Action Section with Wave Pattern */}
         <section className="wave-bottom mt-16 pb-24 pt-12 bg-white relative w-full">
           <div className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING}`}>
-            <h2 className="text-2xl font-heading text-primary mb-4">Ready to contribute?</h2>
+            <h2 className="text-2xl font-semibold font-heading text-primary-dark mb-4">Ready to contribute?</h2>
             <p className="text-neutral-black max-w-2xl">
               Find open source projects that match your skills and interests. 
               GitGood makes it easy to discover beginner-friendly issues and start 

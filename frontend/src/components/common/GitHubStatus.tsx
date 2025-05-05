@@ -34,30 +34,30 @@ const GitHubStatus: React.FC = () => {
             <div className="flex-1 bg-secondary-50/70 rounded-xl p-4 border border-secondary-200/40 transition-all duration-300 hover:shadow-sm">
               <div className="flex items-center mb-2">
                 <Info className="h-4 w-4 text-primary-light mr-2" />
-                <h3 className="text-sm font-medium text-primary">Rate Limit Status</h3>
+                <h3 className="text-sm font-medium text-primary-dark">Rate Limit Status</h3>
               </div>
               <GitHubRateLimit />
             </div>
             
-            <div className="flex-1 bg-gradient-to-br from-green-50 to-green-100/70 rounded-xl p-4 border border-green-200/40 transition-all duration-300 hover:shadow-sm">
+            <div className="flex-1 bg-gradient-to-br from-teal-50 to-teal-100/70 rounded-xl p-4 border border-teal-200/40 transition-all duration-300 hover:shadow-sm">
               <div className="flex items-center mb-2">
-                <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
-                <h3 className="text-sm font-medium text-green-700">Token Information</h3>
+                <CheckCircle className="h-4 w-4 text-teal-600 mr-2" />
+                <h3 className="text-sm font-medium text-teal-700">Token Information</h3>
               </div>
               
               <div className="flex items-start">
                 <div className="mt-1">
-                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                  <div className="w-3 h-3 rounded-full bg-teal-600 animate-pulse"></div>
                 </div>
                 <div className="ml-3">
-                  <p className="font-medium text-green-700">
+                  <p className="font-medium text-teal-700">
                     Using Personal Access Token
                   </p>
-                  <p className="text-green-600/90 text-sm mt-1">
+                  <p className="text-teal-600/90 text-sm mt-1">
                     All requests use the application's token with 5,000 requests/hour limit
                   </p>
-                  <div className="mt-2 text-xs bg-green-200/50 p-2 rounded-md text-green-800 flex items-center">
-                    <AlertTriangle className="h-3 w-3 mr-1.5 text-green-700" />
+                  <div className="mt-2 text-xs bg-teal-200/50 p-2 rounded-md text-teal-800 flex items-center">
+                    <AlertTriangle className="h-3 w-3 mr-1.5 text-teal-700" />
                     This token provides higher rate limits than unauthenticated requests
                   </div>
                 </div>
