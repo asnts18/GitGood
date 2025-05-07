@@ -11,7 +11,7 @@ GitGood is a platform designed to help developers discover beginner-friendly ope
 - **Timeline View**: See recently updated repositories and issues
 - **Project Exploration**: View repository details including stars, language, and open issues
 - **Enhanced GitHub Search**: Search across GitHub with advanced filters for languages, organizations, and topics
-- **Beginner Friendliness Score**: Each project is rated based on documentation quality, community activity, and issue organization
+- **Beginner Friendliness Score**: Each project is rated based on documentation quality, community activity, and issue organization. Noratest
 
 ## 📋 Table of Contents
 
