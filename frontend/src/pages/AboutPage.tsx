@@ -12,7 +12,7 @@ const AboutPage: React.FC = () => {
       
       <main className={`${UI.MAX_WIDTH} mx-auto ${UI.DEFAULT_PADDING} py-12`}>
         <div className="p-8 rounded-2xl bg-white shadow-lg border border-secondary-200/30 mb-8 transition-all duration-300 hover:shadow-xl">
-          <h1 className="text-4xl font-heading text-primary mb-8 relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-24 after:h-1 after:bg-accent after:rounded-full">
+          <h1 className="text-4xl font-heading text-primary-dark mb-8 relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-24 after:h-1 after:bg-accent after:rounded-full">
             About GitGood
           </h1>
           
@@ -48,7 +48,7 @@ const AboutPage: React.FC = () => {
                   "Find a project you're interested in and start contributing"
                 ].map((item, index) => (
                   <li key={index} className="pl-8 relative">
-                    <span className="absolute left-0 top-1 w-4 h-4 rounded-full bg-accent flex items-center justify-center text-xs text-neutral-navy font-medium">
+                    <span className="absolute left-0 top-1 w-4 h-4 rounded-full bg-accent flex items-center justify-center text-xs text-white font-medium">
                       {index + 1}
                     </span>
                     {item}

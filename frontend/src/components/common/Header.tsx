@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HelpCircle, Home, Search, Info, Menu, X } from 'lucide-react';
+import newlogo from '../../images/newlogo.png';
 
 interface HeaderProps {
   title?: string;
@@ -32,8 +33,8 @@ const Header: React.FC<HeaderProps> = ({ title = 'GitGood' }) => {
       to={to} 
       className={`group relative px-4 py-2 rounded-lg transition-all duration-300 ${
         isActive(to) 
-          ? 'text-primary font-semibold' 
-          : 'text-primary-light hover:text-primary font-medium'
+          ? 'text-primary-dark font-semibold' 
+          : 'text-primary-light hover:text-primary-dark font-medium'
       }`}
       onClick={() => setMobileMenuOpen(false)}
     >
@@ -68,10 +69,15 @@ const Header: React.FC<HeaderProps> = ({ title = 'GitGood' }) => {
               className="group flex items-center transition-transform duration-300 hover:scale-105"
             >
               {/* You could add a logo image here */}
-              <div className="bg-primary rounded-lg p-2 mr-2 shadow-sm group-hover:shadow-md transition-all duration-300">
+              {/* <div className="bg-primary rounded-lg p-2 mr-2 shadow-sm group-hover:shadow-md transition-all duration-300">
                 <span className="text-white font-bold text-xl">GG</span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-bold font-heading text-primary group-hover:text-primary-dark transition-colors duration-300">
+              </div> */}
+              <img 
+                        src={newlogo} 
+                        alt="GitGood Logo"
+                        className="w-16 h-auto"
+                    />
+              <h1 className="ml-3 text-2xl sm:text-3xl font-bold font-heading text-primary-dark group-hover:text-primary transition-colors duration-300">
                 {title}
               </h1>
             </Link>

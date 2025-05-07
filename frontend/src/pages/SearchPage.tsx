@@ -201,7 +201,7 @@ const SearchPage: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-primary tracking-tight mb-1">Search Projects & Issues</h1>
+                  <h1 className="text-2xl font-semibold text-primary-dark tracking-tight mb-1">Search Projects & Issues</h1>
                   <p className="text-md text-neutral-700 leading-relaxed">
                     Explore open-source repositories tailored to your skills and interests. Filter by language, difficulty, and more to find the perfect opportunity.
                   </p>

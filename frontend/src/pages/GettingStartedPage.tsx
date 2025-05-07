@@ -46,7 +46,7 @@ const GettingStartedPage: React.FC = () => {
         <div className="space-y-8 pb-12">
           {/* Hero Section with improved styling */}
           <div className="p-8 rounded-xl bg-gradient-to-r from-secondary-50 to-secondary-100 shadow-sm border border-secondary-200/40">
-            <h1 className="text-3xl md:text-4xl font-heading text-primary mb-4">Getting Started with Open Source</h1>
+            <h1 className="text-3xl md:text-4xl font-heading text-primary-dark mb-4">Getting Started with Open Source</h1>
             <p className="text-lg text-neutral-black max-w-3xl">
               Follow this visual guide to make your first open source contribution.
             </p>
@@ -54,13 +54,13 @@ const GettingStartedPage: React.FC = () => {
           
           {/* Introduction Section - Streamlined */}
           <section className="bg-white rounded-xl p-8 shadow-sm border border-secondary-200/30">
-            <h2 className="text-2xl font-heading text-primary mb-6 flex items-center">
-              <Github className="h-6 w-6 mr-2 text-primary-light" />
+            <h2 className="text-2xl font-heading font-semibold text-primary mb-6 flex items-center">
+              <Github className="h-6 w-6 mr-2 text-primary" />
               Why Contribute to Open Source?
             </h2>
             
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-secondary-50/70 p-5 rounded-lg border border-secondary-200/40 hover:shadow-md transition-all duration-300">
+              <div className="bg-secondary-50/70 p-5 rounded-lg border border-secondary-200/40 hover:shadow-md transition-all duration-300 ">
                 <h3 className="font-heading text-primary-dark text-lg mb-2">Build Your Skills</h3>
                 <p className="text-neutral-black text-sm">Improve your coding abilities by working on real-world projects with experienced developers.</p>
               </div>
@@ -79,7 +79,7 @@ const GettingStartedPage: React.FC = () => {
           
           {/* Step-by-Step Guide - With Images */}
           <section className="bg-white rounded-xl p-8 shadow-sm border border-secondary-200/30">
-            <h2 className="text-2xl font-heading text-primary mb-6 flex items-center">
+            <h2 className="text-2xl font-heading font-semibold text-primary mb-6 flex items-center">
               <BookOpen className="h-6 w-6 mr-2 text-primary-light" />
               Step-by-Step Contribution Guide
             </h2>
@@ -288,7 +288,7 @@ const GettingStartedPage: React.FC = () => {
           
           {/* Best Practices - More Visual */}
           <section className="bg-white rounded-xl p-8 shadow-sm border border-secondary-200/30">
-            <h2 className="text-2xl font-heading text-primary mb-6">Best Practices</h2>
+            <h2 className="text-2xl font-heading font-semibold text-primary mb-6">Best Practices</h2>
             
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-secondary-50 to-secondary-100 p-6 rounded-xl border border-secondary-200/40 shadow-sm hover:shadow-md transition-all duration-300">
@@ -333,13 +333,13 @@ const GettingStartedPage: React.FC = () => {
           <section className="bg-gradient-to-r from-primary to-primary-dark rounded-xl p-8 text-neutral-white shadow-md">
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-                <h2 className="text-2xl font-heading mb-4">Ready to Start Contributing?</h2>
+                <h2 className="text-2xl font-heading mb-4 text-neutral-white font-semibold">Ready to Start Contributing?</h2>
                 <p className="mb-6 text-neutral-white/90">
                   Now that you know the process, it's time to find your first project and make your contribution!
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link to="/search">
-                    <Button variant="accent" size="lg" className="group">
+                    <Button variant="accent" size="lg" className="group ">
                       Find a Project
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>

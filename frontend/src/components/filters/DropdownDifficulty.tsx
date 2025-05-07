@@ -31,10 +31,10 @@ export const DropdownDifficulty: React.FC = () => {
         };
       case 'intermediate':
         return {
-          textColor: selected ? 'text-neutral-navy' : 'text-amber-700',
-          bgColor: selected ? 'bg-amber-500' : 'bg-amber-50',
-          hoverColor: 'bg-amber-600',
-          borderColor: 'border-amber-500'
+          textColor: selected ? 'text-white' : 'text-amber-700',
+          bgColor: selected ? 'bg-indigo-500' : 'bg-indigo-50',
+          hoverColor: 'bg-indigo-600',
+          borderColor: 'border-indigo-500'
         };
       case 'advanced':
         return {

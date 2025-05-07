@@ -123,7 +123,7 @@ const GitHubRateLimit: React.FC = () => {
   // Fallback UI when there's an error
   return (
     <div className="space-y-3">
-      <div className="text-amber-600 text-sm flex items-center mb-2">
+      <div className="text-red-600 text-sm flex items-center mb-2">
         <AlertCircle className="h-4 w-4 mr-2" />
         Unable to fetch live rate limit data
       </div>
@@ -135,7 +135,7 @@ const GitHubRateLimit: React.FC = () => {
       
       <div className="w-full bg-secondary-100 rounded-full h-2 mt-2">
         <div
-          className="bg-amber-500 h-2 rounded-full transition-all duration-300"
+          className="bg-primary h-2 rounded-full transition-all duration-300"
           style={{ width: `${(mockData.remaining / mockData.limit) * 100}%` }}
         ></div>
       </div>
