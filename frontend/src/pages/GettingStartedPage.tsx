@@ -3,6 +3,8 @@ import Header from 'components/common/Header';
 import { UI } from 'utils/constants';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/ButtonComponent';
+import CopyableCodeBlock from '../components/ui/CopyableCodeBlock';
+
 import { 
   ArrowRight, 
   Github, 
@@ -135,11 +137,15 @@ const GettingStartedPage: React.FC = () => {
                       alt="GitHub fork button location"
                       className="w-full h-auto rounded shadow-inner"
                     />
-                    <div className="mt-2 p-3 bg-secondary-200/30 rounded text-sm text-primary-dark">
+
+                  <div className="mt-2 p-3 bg-secondary-200/30 rounded text-sm text-primary-dark">
+                    <CopyableCodeBlock>
                       <Terminal className="inline-block h-4 w-4 mr-1" />
                       <code>git clone https://github.com/your-username/repository-name.git</code>
-                    </div>
+                    </CopyableCodeBlock>
                   </div>
+
+                </div>
                 </div>
               </div>
               
@@ -163,8 +169,10 @@ const GettingStartedPage: React.FC = () => {
                       className="w-full h-auto rounded shadow-inner"
                     />
                     <div className="mt-2 p-3 bg-secondary-200/30 rounded text-sm text-primary-dark">
-                      <GitBranch className="inline-block h-4 w-4 mr-1" />
-                      <code>git checkout -b fix-login-button</code>
+                      <CopyableCodeBlock>
+                        <GitBranch className="inline-block h-4 w-4 mr-1" />
+                        <code>git checkout -b fix-login-button</code>
+                      </CopyableCodeBlock>
                     </div>
                   </div>
                 </div>
@@ -189,11 +197,15 @@ const GettingStartedPage: React.FC = () => {
                       alt="GitHub committing changes interface"
                       className="w-full h-auto rounded shadow-inner"
                     />
+
                     <div className="mt-2 p-3 bg-secondary-200/30 rounded text-sm text-primary-dark">
-                      <Code className="inline-block h-4 w-4 mr-1" />
-                      <code>git add file-you-changed.js</code><br/>
-                      <code>git commit -m "Fix login button styling"</code>
+                      <CopyableCodeBlock>
+                        <Code className="inline-block h-4 w-4 mr-1" />
+                        <code>git add file-you-changed.js</code>
+                        <code>git commit -m "Fix login button styling"</code>
+                      </CopyableCodeBlock>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -217,10 +229,14 @@ const GettingStartedPage: React.FC = () => {
                       alt="GitHub pushing changes interface"
                       className="w-full h-auto rounded shadow-inner"
                     />
+
                     <div className="mt-2 p-3 bg-secondary-200/30 rounded text-sm text-primary-dark">
-                      <Terminal className="inline-block h-4 w-4 mr-1" />
-                      <code>git push origin fix-login-button</code>
+                      <CopyableCodeBlock>
+                        <Terminal className="inline-block h-4 w-4 mr-1" />
+                        <code>git push origin fix-login-button</code>
+                      </CopyableCodeBlock>
                     </div>
+
                   </div>
                 </div>
               </div>
