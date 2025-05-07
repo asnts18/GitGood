@@ -46,7 +46,7 @@ const CopyableCodeBlock: React.FC<CopyableCodeBlockProps> = ({ children }) => {
       </div>
       <button
         onClick={copyToClipboard}
-        className="absolute top-2 right-2 p-1 rounded bg-secondary-200/50 hover:bg-secondary-200 transition-colors opacity-0 group-hover:opacity-100"
+        className="absolute top-0.5 right-2 p-1 rounded bg-secondary-200/50 hover:bg-secondary-200 transition-colors opacity-0 group-hover:opacity-100"
         aria-label="Copy to clipboard"
       >
         {copied ? (
